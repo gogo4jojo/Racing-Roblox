@@ -1,0 +1,13 @@
+--Section 1: Create collect info for each player and display on leaderboard
+local function OnPlayerJoin(player)
+	local leaderstats = Instance.new("Folder")
+	leaderstats.Name = "leaderstats"
+	leaderstats.Parent = player
+	
+	local item = Instance.new("IntValue")
+	item.Name = "Coins"
+	item.Value = 0
+	item.Parent = leaderstats
+end
+--Section 2: Triggered every time when a new player join the game
+game.Players.PlayerAdded:Connect(OnPlayerJoin)

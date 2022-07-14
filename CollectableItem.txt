@@ -1,0 +1,28 @@
+--Section 1: Set variables for picking up
+local collectPart = script.Parent
+local collectible = true
+local collectValue = 1
+local respawnTime = 15
+
+--Section 2: Create function for adding coins to player and coin respawning
+local function OnTouch(other)
+	local humanoid = other.Parent:FindFirstChild("Humanoid")
+	if humanoid and collectible then
+		collectible = false
+		local character = other.Parent
+		local player = game.Players:GetPlayerFromCharacter(character)
+
+		if player then
+			local collectItem = player.leaderstats.Coins
+			collectItem.Value += collectValue
+			collectPart.Transparency = 1
+			wait(respawnTime)
+			collectPart.Transparency = 0
+			collectible = true
+		end
+	end
+end
+
+--Section 3: Trigger pick-up function when the coin is touched
+collectPart.Touched:Connect(OnTouch)
+
